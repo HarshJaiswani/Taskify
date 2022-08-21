@@ -1,0 +1,33 @@
+.todos__single {
+  display: flex;
+  border-radius: 5px;
+  padding: 20px;
+  margin-top: 15px;
+  background-color: rgba(128, 128, 128, 0.521);
+  transition: 0.2s;
+  color: white;
+}
+.todos__single:hover {
+  transform: scale(1.03);
+}
+.todos__single--text {
+  flex: 1;
+  padding: 5px;
+  border: none;
+  font-size: 20px;
+}
+.todos__single--text:focus {
+  outline: none;
+}
+.icon {
+  margin-left: 10px;
+  font-size: 25px;
+  cursor: pointer;
+}
+.edit__input {
+  outline: none;
+  border-radius: inherit;
+  border: none;
+  font-weight: 500;
+  font-size: 1rem;
+}
