@@ -16,7 +16,7 @@ import MobileNav from "../components/MobileNav";
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
-  const nonProtectedRoutes = ["/login", "/signup", "/"];
+  const nonProtectedRoutes = ["/signup", "/"];
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isNavOpen, setIsNavOpen] = useState(true);
   const [loading, setLoading] = useState(false);
