@@ -35,7 +35,7 @@ const handler = async (req, res) => {
     res.send({ authtoken });
   } catch (error) {
     console.error(error.message);
-    res.status(500).send("Internal server error!!");
+    res.status(500).json({ error: "Internal server error!!" });
   }
 };
 
