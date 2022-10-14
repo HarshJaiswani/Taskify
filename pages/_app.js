@@ -40,7 +40,7 @@ function MyApp({ Component, pageProps }) {
       setLoading(false);
     });
   });
-  const backend = width >= 1024 ? HTML5Backend : TouchBackend;
+  const backend = true ? HTML5Backend : TouchBackend;
   return (
     <DndProvider backend={backend}>
       <Head>
