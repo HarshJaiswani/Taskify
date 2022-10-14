@@ -41,8 +41,7 @@ function MyApp({ Component, pageProps }) {
     });
   });
   return (
-    // <DndProvider backend={width >= 1024 ? HTML5Backend : TouchBackend}>
-    <DndProvider backend={HTML5Backend}>
+    <DndProvider backend={width >= 1024 ? { HTML5Backend } : { TouchBackend }}>
       <Head>
         <title>
           {router.pathname.toUpperCase().replace("/", "") == ""
