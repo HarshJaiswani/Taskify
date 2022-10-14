@@ -8,35 +8,11 @@ import Navbar from "../components/Navbar";
 import Login from "./login";
 import Signup from "./signup";
 import Image from "next/image";
-import { TouchBackend } from "react-dnd-touch-backend";
 import { DndProvider } from "react-dnd";
-// import {
-//   DndProvider,
-//   TouchTransition,
-//   MouseTransition,
-// } from "react-dnd-multi-backend";
 import { HTML5Backend } from "react-dnd-html5-backend";
-// import { MultiBackend } from "react-dnd-multi-backend";
-// import { HTML5toTouch } from "rdndmb-html5-to-touch";
+import { TouchBackend } from "react-dnd-touch-backend";
 import { useWindow } from "../hooks/getWindow";
 import MobileNav from "../components/MobileNav";
-
-// export const HTML5toTouch = {
-//   backends: [
-//     {
-//       id: "html5",
-//       backend: HTML5Backend,
-//       transition: MouseTransition,
-//     },
-//     {
-//       id: "touch",
-//       backend: TouchBackend,
-//       options: { enableMouseEvents: true },
-//       preview: true,
-//       transition: TouchTransition,
-//     },
-//   ],
-// };
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
