@@ -9,7 +9,7 @@ import Login from "./login";
 import Signup from "./signup";
 import Image from "next/image";
 import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+// import { HTML5Backend } from "react-dnd-html5-backend";
 import { TouchBackend } from "react-dnd-touch-backend";
 import { useWindow } from "../hooks/getWindow";
 import MobileNav from "../components/MobileNav";
@@ -17,11 +17,11 @@ import MobileNav from "../components/MobileNav";
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const nonProtectedRoutes = ["/signup", "/"];
-  const [widthScreen, setWidthScreen] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isNavOpen, setIsNavOpen] = useState(true);
   const [loading, setLoading] = useState(false);
   const { width } = useWindow();
+
   useEffect(() => {
     let authToken = localStorage.getItem("auth-token");
     if (authToken) {
@@ -33,6 +33,7 @@ function MyApp({ Component, pageProps }) {
   const capitalise = (a) => {
     return a.charAt(0).toUpperCase() + a.slice(1);
   };
+
   useEffect(() => {
     Router.events.on("routeChangeStart", () => {
       setLoading(true);
@@ -40,15 +41,14 @@ function MyApp({ Component, pageProps }) {
     Router.events.on("routeChangeComplete", () => {
       setLoading(false);
     });
-    if (window.innerWidth >= 1024) {
-      setWidthScreen(true);
-    } else {
-      setWidthScreen(false);
-    }
   });
-  const backend = widthScreen ? HTML5Backend : TouchBackend;
+
+  const opts = {
+    enableMouseEvents: true,
+  };
+
   return (
-    <DndProvider backend={backend}>
+    <DndProvider backend={TouchBackend} options={opts}>
       <Head>
         <title>
           {router.pathname.toUpperCase().replace("/", "") == ""
