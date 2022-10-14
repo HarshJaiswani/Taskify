@@ -13,7 +13,7 @@ const Column = ({ col, tasks, moveItem, fetchData }) => {
     drop(item) {
       moveItem(item, col);
       if (item.status == col.toLowerCase()) {
-        console.log("change in priority!");
+        // console.log("change in priority!");
       }
     },
   });
