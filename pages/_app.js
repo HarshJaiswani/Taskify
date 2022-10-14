@@ -10,9 +10,33 @@ import Signup from "./signup";
 import Image from "next/image";
 import { TouchBackend } from "react-dnd-touch-backend";
 import { DndProvider } from "react-dnd";
+// import {
+//   DndProvider,
+//   TouchTransition,
+//   MouseTransition,
+// } from "react-dnd-multi-backend";
 import { HTML5Backend } from "react-dnd-html5-backend";
+// import { MultiBackend } from "react-dnd-multi-backend";
+// import { HTML5toTouch } from "rdndmb-html5-to-touch";
 import { useWindow } from "../hooks/getWindow";
 import MobileNav from "../components/MobileNav";
+
+// export const HTML5toTouch = {
+//   backends: [
+//     {
+//       id: "html5",
+//       backend: HTML5Backend,
+//       transition: MouseTransition,
+//     },
+//     {
+//       id: "touch",
+//       backend: TouchBackend,
+//       options: { enableMouseEvents: true },
+//       preview: true,
+//       transition: TouchTransition,
+//     },
+//   ],
+// };
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -41,112 +65,232 @@ function MyApp({ Component, pageProps }) {
     });
   });
   return (
-    <DndProvider backend={width >= 1024 ? { HTML5Backend } : { TouchBackend }}>
-      <Head>
-        <title>
-          {router.pathname.toUpperCase().replace("/", "") == ""
-            ? "Home - Taskify"
-            : `${capitalise(router.pathname.replace("/", ""))} - Taskify`}
-        </title>
-      </Head>
-      {isLoggedIn && (
-        <div className="flex w-full">
-          {width >= 1024 ? (
-            <Navbar
-              isLoggedIn={isLoggedIn}
-              isNavOpen={isNavOpen}
-              setIsNavOpen={setIsNavOpen}
-            />
-          ) : (
-            <MobileNav />
-          )}
-          <div
-            className={`${
-              width >= 1024 ? `${isNavOpen ? "w-[80%]" : "w-full"}` : `w-full`
-            } h-screen`}
-          >
-            <Header
-              isLoggedIn={isLoggedIn}
-              isNavOpen={isNavOpen}
-              setIsNavOpen={setIsNavOpen}
-            />
-            <div className="w-full h-[90vh] overflow-x-hidden overflow-y-auto">
-              {loading ? (
-                <div className="w-full h-full flex items-center justify-center">
-                  <div className="flex items-center scale-150">
-                    <span>
-                      <Image
-                        src="/assets/logo.png"
-                        width={40}
-                        height={40}
-                        alt="Logo"
-                      />
-                    </span>
-                    <span className="text-xl font-semibold tracking-wide font-mono">
-                      Taskify
-                    </span>
-                  </div>
-                </div>
+    <>
+      {width >= 1024 && (
+        <DndProvider backend={HTML5Backend}>
+          <Head>
+            <title>
+              {router.pathname.toUpperCase().replace("/", "") == ""
+                ? "Home - Taskify"
+                : `${capitalise(router.pathname.replace("/", ""))} - Taskify`}
+            </title>
+          </Head>
+          {isLoggedIn && (
+            <div className="flex w-full">
+              {width >= 1024 ? (
+                <Navbar
+                  isLoggedIn={isLoggedIn}
+                  isNavOpen={isNavOpen}
+                  setIsNavOpen={setIsNavOpen}
+                />
               ) : (
-                <Component {...pageProps} isLoggedIn={isLoggedIn} />
+                <MobileNav />
               )}
-            </div>
-            {width <= 1024 && <div className="w-full h-[10vh]"></div>}
-          </div>
-        </div>
-      )}
-      {!isLoggedIn && router.asPath == "/" && (
-        <div className="flex w-full">
-          {width >= 1024 ? (
-            <Navbar
-              isLoggedIn={isLoggedIn}
-              isNavOpen={isNavOpen}
-              setIsNavOpen={setIsNavOpen}
-            />
-          ) : (
-            <MobileNav />
-          )}
-          <div
-            className={`${
-              width >= 1024 ? `${isNavOpen ? "w-[80%]" : "w-full"}` : `w-full`
-            } h-screen`}
-          >
-            <Header
-              isLoggedIn={isLoggedIn}
-              isNavOpen={isNavOpen}
-              setIsNavOpen={setIsNavOpen}
-            />
-            <div className="w-full h-[90vh] overflow-x-hidden overflow-y-auto">
-              {loading ? (
-                <div className="w-full h-full flex items-center justify-center">
-                  <div className="flex items-center scale-150">
-                    <span>
-                      <Image
-                        src="/assets/logo.png"
-                        width={40}
-                        height={40}
-                        alt="Logo"
-                      />
-                    </span>
-                    <span className="text-xl font-semibold tracking-wide font-mono">
-                      Taskify
-                    </span>
-                  </div>
+              <div
+                className={`${
+                  width >= 1024
+                    ? `${isNavOpen ? "w-[80%]" : "w-full"}`
+                    : `w-full`
+                } h-screen`}
+              >
+                <Header
+                  isLoggedIn={isLoggedIn}
+                  isNavOpen={isNavOpen}
+                  setIsNavOpen={setIsNavOpen}
+                />
+                <div className="w-full h-[90vh] overflow-x-hidden overflow-y-auto">
+                  {loading ? (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <div className="flex items-center scale-150">
+                        <span>
+                          <Image
+                            src="/assets/logo.png"
+                            width={40}
+                            height={40}
+                            alt="Logo"
+                          />
+                        </span>
+                        <span className="text-xl font-semibold tracking-wide font-mono">
+                          Taskify
+                        </span>
+                      </div>
+                    </div>
+                  ) : (
+                    <Component {...pageProps} isLoggedIn={isLoggedIn} />
+                  )}
                 </div>
-              ) : (
-                <Component {...pageProps} isLoggedIn={isLoggedIn} />
-              )}
+                {width <= 1024 && <div className="w-full h-[10vh]"></div>}
+              </div>
             </div>
-          </div>
-        </div>
+          )}
+          {!isLoggedIn && router.asPath == "/" && (
+            <div className="flex w-full">
+              {width >= 1024 ? (
+                <Navbar
+                  isLoggedIn={isLoggedIn}
+                  isNavOpen={isNavOpen}
+                  setIsNavOpen={setIsNavOpen}
+                />
+              ) : (
+                <MobileNav />
+              )}
+              <div
+                className={`${
+                  width >= 1024
+                    ? `${isNavOpen ? "w-[80%]" : "w-full"}`
+                    : `w-full`
+                } h-screen`}
+              >
+                <Header
+                  isLoggedIn={isLoggedIn}
+                  isNavOpen={isNavOpen}
+                  setIsNavOpen={setIsNavOpen}
+                />
+                <div className="w-full h-[90vh] overflow-x-hidden overflow-y-auto">
+                  {loading ? (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <div className="flex items-center scale-150">
+                        <span>
+                          <Image
+                            src="/assets/logo.png"
+                            width={40}
+                            height={40}
+                            alt="Logo"
+                          />
+                        </span>
+                        <span className="text-xl font-semibold tracking-wide font-mono">
+                          Taskify
+                        </span>
+                      </div>
+                    </div>
+                  ) : (
+                    <Component {...pageProps} isLoggedIn={isLoggedIn} />
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+          {!isLoggedIn && !nonProtectedRoutes.includes(router.asPath) && (
+            <Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+          )}
+          {!isLoggedIn && router.asPath == "/signup" && (
+            <Signup isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+          )}
+        </DndProvider>
       )}
-      {!isLoggedIn && !nonProtectedRoutes.includes(router.asPath) && (
-        <Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+      {width < 1024 && (
+        <DndProvider backend={TouchBackend}>
+          <Head>
+            <title>
+              {router.pathname.toUpperCase().replace("/", "") == ""
+                ? "Home - Taskify"
+                : `${capitalise(router.pathname.replace("/", ""))} - Taskify`}
+            </title>
+          </Head>
+          {isLoggedIn && (
+            <div className="flex w-full">
+              {width >= 1024 ? (
+                <Navbar
+                  isLoggedIn={isLoggedIn}
+                  isNavOpen={isNavOpen}
+                  setIsNavOpen={setIsNavOpen}
+                />
+              ) : (
+                <MobileNav />
+              )}
+              <div
+                className={`${
+                  width >= 1024
+                    ? `${isNavOpen ? "w-[80%]" : "w-full"}`
+                    : `w-full`
+                } h-screen`}
+              >
+                <Header
+                  isLoggedIn={isLoggedIn}
+                  isNavOpen={isNavOpen}
+                  setIsNavOpen={setIsNavOpen}
+                />
+                <div className="w-full h-[90vh] overflow-x-hidden overflow-y-auto">
+                  {loading ? (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <div className="flex items-center scale-150">
+                        <span>
+                          <Image
+                            src="/assets/logo.png"
+                            width={40}
+                            height={40}
+                            alt="Logo"
+                          />
+                        </span>
+                        <span className="text-xl font-semibold tracking-wide font-mono">
+                          Taskify
+                        </span>
+                      </div>
+                    </div>
+                  ) : (
+                    <Component {...pageProps} isLoggedIn={isLoggedIn} />
+                  )}
+                </div>
+                {width <= 1024 && <div className="w-full h-[10vh]"></div>}
+              </div>
+            </div>
+          )}
+          {!isLoggedIn && router.asPath == "/" && (
+            <div className="flex w-full">
+              {width >= 1024 ? (
+                <Navbar
+                  isLoggedIn={isLoggedIn}
+                  isNavOpen={isNavOpen}
+                  setIsNavOpen={setIsNavOpen}
+                />
+              ) : (
+                <MobileNav />
+              )}
+              <div
+                className={`${
+                  width >= 1024
+                    ? `${isNavOpen ? "w-[80%]" : "w-full"}`
+                    : `w-full`
+                } h-screen`}
+              >
+                <Header
+                  isLoggedIn={isLoggedIn}
+                  isNavOpen={isNavOpen}
+                  setIsNavOpen={setIsNavOpen}
+                />
+                <div className="w-full h-[90vh] overflow-x-hidden overflow-y-auto">
+                  {loading ? (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <div className="flex items-center scale-150">
+                        <span>
+                          <Image
+                            src="/assets/logo.png"
+                            width={40}
+                            height={40}
+                            alt="Logo"
+                          />
+                        </span>
+                        <span className="text-xl font-semibold tracking-wide font-mono">
+                          Taskify
+                        </span>
+                      </div>
+                    </div>
+                  ) : (
+                    <Component {...pageProps} isLoggedIn={isLoggedIn} />
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+          {!isLoggedIn && !nonProtectedRoutes.includes(router.asPath) && (
+            <Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+          )}
+          {!isLoggedIn && router.asPath == "/signup" && (
+            <Signup isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+          )}
+        </DndProvider>
       )}
-      {!isLoggedIn && router.asPath == "/signup" && (
-        <Signup isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-      )}
-    </DndProvider>
+    </>
   );
 }
 
