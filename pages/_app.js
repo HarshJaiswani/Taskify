@@ -17,6 +17,7 @@ import MobileNav from "../components/MobileNav";
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const nonProtectedRoutes = ["/signup", "/"];
+  const [widthScreen, setWidthScreen] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isNavOpen, setIsNavOpen] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -39,8 +40,13 @@ function MyApp({ Component, pageProps }) {
     Router.events.on("routeChangeComplete", () => {
       setLoading(false);
     });
+    if (window.innerWidth >= 1024) {
+      setWidthScreen(true);
+    } else {
+      setWidthScreen(false);
+    }
   });
-  const backend = true ? HTML5Backend : TouchBackend;
+  const backend = widthScreen ? HTML5Backend : TouchBackend;
   return (
     <DndProvider backend={backend}>
       <Head>
