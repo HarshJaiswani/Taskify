@@ -40,8 +40,9 @@ function MyApp({ Component, pageProps }) {
       setLoading(false);
     });
   });
+  const backend = width >= 1024 ? HTML5Backend : TouchBackend;
   return (
-    <DndProvider backend={width <= 1024 ? TouchBackend : HTML5Backend}>
+    <DndProvider backend={backend}>
       <Head>
         <title>
           {router.pathname.toUpperCase().replace("/", "") == ""
