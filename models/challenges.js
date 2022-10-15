@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 const DidTodaySchema = mongoose.Schema({
   date: {
     type: String,
-    unique: true,
   },
   isDone: Boolean,
 });

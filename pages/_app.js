@@ -95,7 +95,11 @@ function MyApp({ Component, pageProps }) {
                   </div>
                 </div>
               ) : (
-                <Component {...pageProps} isLoggedIn={isLoggedIn} />
+                <Component
+                  {...pageProps}
+                  isLoggedIn={isLoggedIn}
+                  setLoading={setLoading}
+                />
               )}
             </div>
             {width <= 1024 && <div className="w-full h-[10vh]"></div>}

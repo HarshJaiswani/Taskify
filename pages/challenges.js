@@ -55,7 +55,7 @@ const Challenges = () => {
       {showChallenges && (
         <div
           onClick={() => setShowChallenges(false)}
-          className="lg:absolute top-3 right-8 w-fit border cursor-pointer hover:bg-gray-50 px-4 py-2 rounded-md"
+          className="lg:absolute top-3 right-8 lg:ml-0 mb-4 ml-4 w-fit border cursor-pointer hover:bg-gray-50 px-4 py-2 rounded-md"
         >
           Create Challenge
         </div>
@@ -73,7 +73,7 @@ const Challenges = () => {
           </div>
           <ul className="w-full my-4">
             {todaysChallenges.length <= 0 && (
-              <div className="text-center text-xl font-semibold">
+              <div className="ml-5 font-semibold">
                 No challenges available{" "}
                 <span className="text-green-600">Create one!</span>
               </div>
@@ -95,7 +95,7 @@ const Challenges = () => {
           </ul>
           {!showAll && (
             <div className="flex items-center">
-              <span className="font-semibold text-lg mr-4 my-5">
+              <span className="font-semibold text-lg ml-4 mr-4 my-5">
                 View all your challenges
               </span>
               <span
