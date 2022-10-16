@@ -21,6 +21,16 @@ const AllChallenges = (props) => {
     fetchData();
   };
 
+  const getScore = (challenge) => {
+    let count = 0;
+    challenge.didToday.forEach((e) => {
+      if (e.isDone) {
+        count++;
+      }
+    });
+    return count;
+  };
+
   return (
     <div>
       <div className="px-4 py-2 font-mono font-semibold text-xl">
@@ -52,12 +62,20 @@ const AllChallenges = (props) => {
                 </div>
                 <div className="w-full px-3">
                   <div className="text-black font-semibold">Took for -</div>
-                  <div className="mb-[10px]">{item.noOfDays}</div>
+                  <div className="mb-[10px]">
+                    {item.noOfDays > 0 ? item.noOfDays : "Forever"}
+                  </div>
                 </div>
                 <div className="w-full px-3">
                   <div className="text-black font-semibold">Status - </div>
                   <div className="mb-[10px]">
                     {item.isCompleted ? "Done" : "In-progress"}
+                  </div>
+                </div>
+                <div className="w-full px-3">
+                  <div className="text-black font-semibold">Score - </div>
+                  <div className="mb-[10px]">
+                    {getScore(item)}/{item.didToday.length}
                   </div>
                 </div>
                 <div className="absolute top-5 right-5 flex">
@@ -94,6 +112,9 @@ const AllChallenges = (props) => {
                     Status
                   </th>
                   <th className="bg-[#212529] py-3 text-white font-semibold">
+                    Score
+                  </th>
+                  <th className="bg-[#212529] py-3 text-white font-semibold">
                     Options
                   </th>
                 </tr>
@@ -119,6 +140,9 @@ const AllChallenges = (props) => {
                     </td>
                     <td className="text-center py-3">
                       {item.isCompleted ? "Done" : "In-progress"}
+                    </td>
+                    <td className="text-center py-3">
+                      {getScore(item)}/{item.didToday.length}
                     </td>
                     <td className="h-full flex justify-evenly items-center text-[#4158d0] cursor-pointer">
                       <MdEdit onClick={() => updateChallenge(item)} />

@@ -4,7 +4,7 @@ import { AiFillCaretRight } from "react-icons/ai";
 import AllChallenges from "../components/AllChallenges";
 import CreateChallenge from "../components/CreateChallenge";
 
-const Challenges = () => {
+const Challenges = (props) => {
   const [challenges, setChallenges] = useState([]);
   const [todaysChallenges, setTodaysChallenges] = useState([]);
   const [updateData, setUpdateData] = useState([]);
