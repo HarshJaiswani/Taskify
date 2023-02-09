@@ -56,10 +56,14 @@ function App() {
 
   const addData = (e) => {
     e.preventDefault();
-    data[0].tasks.push({ id: uuidv4(), text: todo });
-    setData(data);
-    localStorage.setItem("data", JSON.stringify(data));
-    setTodo("");
+    if (todo == " ") {
+      setTodo("");
+    } else {
+      data[0].tasks.push({ id: uuidv4(), text: todo });
+      setData(data);
+      localStorage.setItem("data", JSON.stringify(data));
+      setTodo("");
+    }
   };
 
   const handleDelete = (id, colId) => {
